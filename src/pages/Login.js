@@ -10,19 +10,23 @@ const Login = () => {
     }
 
     function formSubmit(e) {
-        e.prevetDefault()
+        e.preventDefault()
+
+        localStorage.setItem('user', user);
+
+        window.location = `${window.location}dashboard`
     }
 
 
     return (
-        <>
+        <div className="loginPage">
             <form onSubmit={formSubmit}>
                 <h1>Welcome. Please input your username</h1>
 
                 <input type="text" placeholder="Username" value={user} onChange={changeUser} />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Log In" />
             </form>
-        </>
+        </div>
     );
 }
 

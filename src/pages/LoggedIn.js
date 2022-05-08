@@ -1,16 +1,27 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const LoggedIn = () => {
+
+    const [user, setUser] = useState('')
+
+    function handleLogOut() {
+
+    }
+
+    useEffect(() => {
+        setUser(localStorage.getItem('user'))
+    }, [])
+
     return (
-        <>
-            <main>
-                <h2>Welcome to the homepage!</h2>
-                <p>You can do this, I believe in you.</p>
-            </main>
-            <nav>
-                <Link to="/about">About</Link>
-            </nav>
-        </>
+        <div className="loggedInPage">
+            {
+                user ? <h1>Welcome {user}</h1> : <h1>Loading...</h1>
+            }
+
+            <button onClick={handleLogOut}>Log Out</button>
+            <button>Sign In with a different username</button>
+        </div>
     );
 }
 
