@@ -13,18 +13,5 @@ const UserContextProvider = ({ children }) => {
     )
 }
 
-// class UserContextProvider extends Component {
-//     state = {
-//         login: ''
-//     }
-
-//     render() {
-//         return (
-//             <UserContext.Provider value={this.state.login}>
-//                 {this.props.children}
-//             </UserContext.Provider>
-//         )
-//     }
-// }
 
 export default UserContextProvider
