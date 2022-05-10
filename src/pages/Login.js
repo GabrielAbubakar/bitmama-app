@@ -1,9 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { useState, useEffect } from "react";
 
 const Login = () => {
-
-    const { login, setLogin } = useContext(UserContext)
 
     const [user, setUser] = useState({ name: "", isActive: true })
 
@@ -15,9 +12,8 @@ const Login = () => {
 
     function formSubmit(e) {
         e.preventDefault()
-        // setUsers([...users, user])
-        console.log(login);
-        // window.location = `${window.location}dashboard`
+        setUsers([...users, user])
+        window.location = `${window.location}dashboard`
     }
 
     useEffect(() => {
@@ -32,10 +28,11 @@ const Login = () => {
 
                 <input type="text"
                     placeholder="Username"
-                    value={login}
-                    onChange={(e) => setLogin(e.target.value)} />
+                    value={user.name}
+                    onChange={(e) => setUser({ name: e.target.value, isActive: true })} />
 
                 <input type="submit" value="Log In" />
+                <p>{user.name}</p>
             </form>
         </div>
     );
