@@ -3,53 +3,59 @@ import { UserContext } from "../contexts/UserContext";
 
 const Login = () => {
 
-    const { login, setLogin } = useContext(UserContext)
 
-    const [user, setUser] = useState('')
+    // const [input, setInput] = useState('')
+
+    const { users, currentUser, setCurrentUser, addUser } = useContext(UserContext)
+
+
 
 
     function formSubmit(e) {
         e.preventDefault()
-        setLogin(user)
+        // setCurrentUser(input)
+
+        addUser(currentUser)
         // window.location = `${window.location}dashboard`
     }
+
+    useEffect(() => {
+        localStorage.setItem('users', JSON.stringify(users))
+        localStorage.setItem('currentUser', currentUser)
+    }, [users])
 
 
 
     return (
-        // <div className="loginPage">
-        //     <form onSubmit={formSubmit}>
-        //         <h1>Welcome. Please input your username</h1>
-
-        //         <input type="text"
-        //             placeholder="Username"
-        //             value={login}
-        //             onChange={(e) => setLogin(e.target.value)} />
-
-        //         <input type="submit" value="Log In" />
-        //     </form>
-
-        // </div>
         <div>
+            <form onSubmit={formSubmit}>
+                <h1>Welcome. Please input your username</h1>
+
+                <input type="text"
+                    placeholder="Username"
+                    value={currentUser}
+                    onChange={(e) => setCurrentUser(e.target.value)} />
+
+                <input type="submit" value="Log In" />
+            </form>
+
             {
-                login ? (
+                currentUser && users && (
                     <div>
-                        <h1>Welcome {login}</h1>
+                        <h1>Welcome {currentUser}</h1>
+
+                        <h3>Current Users</h3>
+                        {
+                            users.map(user => {
+                                return <li>{user}</li>
+                            })
+                        }
                     </div>
-                ) : (
-                    <form onSubmit={formSubmit}>
-                        <h1>Welcome. Please input your username</h1>
-
-                        <input type="text"
-                            placeholder="Username"
-                            value={user}
-                            onChange={(e) => setUser(e.target.value)} />
-
-                        <input type="submit" value="Log In" />
-                    </form>
                 )
             }
         </div>
+
+
     );
 }
 
